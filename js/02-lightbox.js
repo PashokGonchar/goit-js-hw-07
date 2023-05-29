@@ -19,31 +19,7 @@ function createGalleryCardsMarkup(galleryItems) {
     .join('');
 }
 
-var lightbox = new SimpleLightbox('.gallery a', {
+const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
-
-const linkTargetBlank = document.querySelectorAll('.gallery__link');
-const linkTargetBlankArray = Array.prototype.slice.call(linkTargetBlank);
-
-linkTargetBlankArray.forEach((e) => {
-  e.addEventListener('click', noTargetBlank, false);
-});
-
-function noTargetBlank(e) {
-  e.preventDefault();
-
-  const instance = lightbox.create(`
-  <div class="gallery">
-    <a href="${preview}"><img src="${original}" alt="${description}"/></a>
-  </div>
-`);
-  instance.show();
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      instance.close();
-    }
-  });
-}
